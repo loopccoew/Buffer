@@ -1,19 +1,82 @@
-#include <fstream>
-#include <iostream>
-#include <string>
-#include "picosha2.h"
+#include "user.h"
 using namespace std;
-class user
-{
 	
-	bool login(string email,string password)
+	bool user::login(string email,string password)
 	{
-				
+		//hashing the password using sha256
+		string hash = picosha2::hash256_hex_string(password);
+
+		//open the file in which all the passwords are stored
+		//we have to read the file here
+		//hence creating an object of ifstream
+		ifstream in("password.txt",ios::in|ios::binary);
+		map<string,string> hashmap; 	//hashmap to store data in email,password format
+		string line;
+		vector<string> keyvalue;
+		while(in)
+		{
+			in>>line;
+			boost::split(keyvalue,line,boost::is_any_of(":"));
+			hashmap.insert(pair<string,string>(keyvalue[0],keyvalue[1]));
+
+		}
+
+		map<string,string>::iterator it;
+
+		/* 
+			Display hashmap for debugging purpose
+
+			for(it = hashmap.begin(); it != hashmap.end(); it++)
+			{
+				cout<<it->first<<endl;
+				cout<<it->second<<endl;
+			} 
+		*/
+
+		it = hashmap.find(email);	//search for the key
+		if(it == hashmap.end())
+		{
+			//key not found
+			//cout<<"\n\tA user with this email id does not exist";
+			return false;
+		}
+		else
+		{
+			//key found
+			//now check if the password matches
+			//compare the hash with the stored hash value of the password
+			if(hash.compare(it->second) == 0)
+				return true;
+			else
+				return false;
+		}
+
+		in.close();
+
 	}
-};
-int main(int argc, char const *argv[])
-{
-	string str = "12345";
-	cout<<"hash = "<<picosha2::hash256_hex_string(str)<<endl;
-	return 0;
-}
+
+	void user::saveLogin(string email,string password)
+	{
+		//hashing the password using sha256
+		string hash = picosha2::hash256_hex_string(password);
+
+		//open file in which all the passwords are stored
+		//we have to write to the file here
+		//hence creating an object of ofstream
+		ofstream out("password.txt",ios::out|ios::app);
+
+		if(!out.is_open())
+		{
+			cout<<"\n\tError - File is not open";
+			return;
+		}
+
+		//write the email and password to file
+		out<<email;
+		out<<":";
+		out<<hash;
+		out<<"\n";
+
+		out.close();	
+	}
+
