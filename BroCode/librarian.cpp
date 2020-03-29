@@ -2,18 +2,7 @@
 
 using namespace std;
 
-class librarian
-{
-	protected:
-
-	string bookname;
-	string author;
-	string bookno;
-	string num;
-	
-	public:
-
-	librarian()
+	librarian::librarian()
 	{
 		bookname=" ";
 		author=" ";
