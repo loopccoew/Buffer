@@ -2,6 +2,8 @@
 using namespace std;
 class person
 {
+	protected:
+
 	string name;
 	string email;
 
@@ -11,7 +13,7 @@ class person
 	person();
 	
 	void show();
-	
+	void input();
 	//~person();
 	
 };
