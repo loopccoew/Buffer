@@ -1,4 +1,4 @@
-#include<librarian.h>
+#include "librarian.h"
 
 using namespace std;
 
@@ -12,21 +12,19 @@ using namespace std;
 
 	void librarian::addBook()
 	{
+
 		fstream fout;
 		fout.open("books.csv",ios::out | ios::app);
 		cout<<"\nEnter details:";
+        cin.get();
 		cout<<"\nEnter name of the book:";
-	    fflush(stdin);
-	    gets(bookname); 
+	    getline(cin,bookname); 
 		cout<<"\nEnter author name:";
-		fflush(stdin);
-	    gets(author); 
+		getline(cin,author); 
 		cout<<"\nEnter booknumber:";
-	    fflush(stdin);
-	    gets(bookno); 
+	    getline(cin,bookno); 
 		cout<<"\nEnter the number of books:";
-		fflush(stdin);
-		gets(num);
+		getline(cin,num);
 		fout<<bookname<<","<<author<<","<<bookno<<","<<num<<"\n";
 	}
 	
@@ -47,10 +45,10 @@ using namespace std;
     string line, word; 
     vector<string> row; 
   
+    cin.get();
     // Get the name of the book from the user 
     cout << "Enter the book name whose copies are to be updated:"; 
-    fflush(stdin);
-    gets(name);
+    getline(cin,bookname);
   
     // Get the data to be updated 
     cout <<"Enter the new number of copies:"; 
@@ -58,29 +56,30 @@ using namespace std;
      
      index=3; //index number of numer of copies of that book
   
-  
+    int row_size;
     // Traverse the file 
     while (!fin.eof())
-	 { 
+	{ 
   
         row.clear(); 
   
         getline(fin, line); 
         stringstream s(line); 
   
-        while (getline(s, word, ', '))
-		 { 
+        while(getline(s,word,','))
+		{ 
             row.push_back(word); 
-         } 
+        } 
   
-        strcpy(name1,name);    
-        int row_size = row.size(); 
+        //strcpy(name1,name); cannot use strcpy for string
+        name1 = name;    
+        row_size = row.size(); 
   
         if((name.compare(name1)) == 0) 
         {
         	count = 1; 
             stringstream convert;
-		}
+		
   
             // sending a number as a stream into output string 
             convert << copies; 
@@ -120,9 +119,10 @@ using namespace std;
         } 
         if (fin.eof()) 
             break;  
-    if (count == 0) 
+        if (count == 0) 
         cout << "Record not found\n"; 
-  
+    }
+
     fin.close(); 
     fout.close(); 
   
@@ -132,4 +132,3 @@ using namespace std;
     // renaming the updated file with the existing file name 
     rename("booksnew.csv", "reportcard.csv"); 
   } 
-};
