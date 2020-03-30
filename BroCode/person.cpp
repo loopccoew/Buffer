@@ -3,8 +3,8 @@ using namespace std;
 	
 	person::person()
 	{
-		name = NULL;
-		email = NULL;
+		name = " ";
+		email = " ";
 	}
 
 	person::person(string name,string email)
