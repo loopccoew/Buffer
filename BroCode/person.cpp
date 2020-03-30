@@ -18,3 +18,11 @@ using namespace std;
 		cout<<"\n\tName : "<<name;
 		cout<<"\n\tEmail id : "<<email;
 	}
+
+	void person::input()
+	{
+		cout<<"\n\tEnter name"<<endl;
+		getline(cin,name);
+		cout<<"\n\tEnter email id"<<endl;
+		getline(cin,email);
+	}
