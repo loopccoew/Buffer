@@ -1,6 +1,8 @@
 #include<iostream>
 #include<string>
-
+#include <fstream>
+#include <sstream>
+#include <vector>
 using std::string;
 class librarian
 {
@@ -12,7 +14,8 @@ class librarian
 	string num;
 	
 	public:
-		    librarian();
-			void addBook();
-			void updateBooks();
+
+	librarian();
+	void addBook();
+	void updateBooks();
 };
