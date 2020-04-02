@@ -11,8 +11,13 @@ class user
 {
 	public:
 	
-	bool login(string email,string password);
+	bool login(string email,string password,char type);
 	
-	void saveLogin(string email,string password);
+	void saveLogin(string email,string password,char type);
+
+	/* type == 's' => student
+	   type == 't' =>teacher 
+	*/
 	
+	bool isUnique(string email,char type);
 };
