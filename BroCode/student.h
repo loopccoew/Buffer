@@ -1,4 +1,6 @@
+#include "date.h"
 #include "person.h"
+#include "librarian.h"
 #include <cmath>
 #include <cstdio>
 #include <vector>
@@ -24,5 +26,7 @@ class student : public person
 	void show(string emailid);
 
 	string getEmail();
+
+	void issue(string emailid);
 
 };
