@@ -18,4 +18,5 @@ class librarian
 	librarian();
 	void addBook();
 	void updateBooks();
+	void deleteBooks();
 };
