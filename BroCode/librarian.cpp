@@ -2,35 +2,35 @@
 
 using namespace std;
 
-	librarian::librarian()
-	{
-		bookname=" ";
-		author=" ";
-		bookno=" ";
-	    num=" ";
-	}	
+    librarian::librarian()
+    {
+        bookname=" ";
+        author=" ";
+        bookno=" ";
+        num=" ";
+    }   
 
-	void librarian::addBook()
-	{
+    void librarian::addBook()
+    {
 
-		fstream fout;
-		fout.open("books.csv",ios::out | ios::app);
-		cout<<"\nEnter details:";
+        fstream fout;
+        fout.open("books.csv",ios::out | ios::app);
+        cout<<"\nEnter details:";
         cin.get();
-		cout<<"\nEnter name of the book:";
-	    getline(cin,bookname); 
-		cout<<"\nEnter author name:";
-		getline(cin,author); 
-		cout<<"\nEnter booknumber:";
-	    getline(cin,bookno); 
-		cout<<"\nEnter the number of books:";
-		getline(cin,num);
-		fout<<bookname<<","<<author<<","<<bookno<<","<<num<<"\n";
-	}
-	
+        cout<<"\nEnter name of the book:";
+        getline(cin,bookname); 
+        cout<<"\nEnter author name:";
+        getline(cin,author); 
+        cout<<"\nEnter booknumber:";
+        getline(cin,bookno); 
+        cout<<"\nEnter the number of books:";
+        getline(cin,num);
+        fout<<bookname<<","<<author<<","<<bookno<<","<<num<<"\n";
+    }
+    
     void librarian::updateBooks(string name,int copies) 
     { 
-  
+    cout<<"\n\tUpdating number of copies in the Library"<<endl;
     fstream fin, fout; 
   
     // Open an existing record 
@@ -39,20 +39,19 @@ using namespace std;
     // Create a new file to store updated data 
     fout.open("booksnew.csv", ios::out); 
   
-    int copies, marks, count = 0, i; 
-    string name,name1; 
+    int marks, count = 0, i; 
+    string name1; 
     int index; 
     string line, word; 
     vector<string> row; 
   
-    cin.get();
    
-     index=3; //index number of number of copies of that book
+    index=3; //index number of number of copies of that book
   
     int row_size;
     // Traverse the file 
     while (!fin.eof())
-	{ 
+    { 
   
         row.clear(); 
   
@@ -65,14 +64,13 @@ using namespace std;
          } 
   
         //strcpy(name1,name); cannot use strcpy for string
-        name1 = name;    
+        name1 = row[0];    
         row_size = row.size(); 
-  
         if((name.compare(name1)) == 0) 
         {
             count = 1; 
             stringstream convert;
-		
+        
   
             // sending a number as a stream into output string 
             convert << copies; 
@@ -81,30 +79,30 @@ using namespace std;
             row[index] = convert.str(); 
   
             if (!fin.eof()) 
-	    { 
+            { 
                 for (i = 0; i < row_size - 1; i++)
-				 
-		{ 
+                 
+                { 
   
                     // write the updated data 
                     // into a new file 'booksnew.csv' 
                     // using fout 
-                    fout << row[i] << ", "; 
+                    fout << row[i] << ","; 
                 } 
   
                 fout << row[row_size - 1] << "\n"; 
             } 
         } 
         else 
-	{ 
+        { 
             if (!fin.eof())
-	     { 
+            { 
                 for (i = 0; i < row_size - 1; i++) 
-		{ 
+                { 
   
                     // writing other existing records 
                     // into the new file using fout. 
-                    fout << row[i] << ", "; 
+                    fout << row[i] << ","; 
                 } 
   
                 // the last column data ends with a '\n' 
@@ -113,9 +111,11 @@ using namespace std;
         } 
         if (fin.eof()) 
             break;  
-        if (count == 0) 
-        cout << "Record not found\n"; 
+         
     }
+
+    if (count == 0) 
+        cout << "Record not found\n";
 
     fin.close(); 
     fout.close(); 
@@ -125,7 +125,8 @@ using namespace std;
   
     // renaming the updated file with the existing file name 
     rename("booksnew.csv", "books.csv"); 
-  } 
+  }
+
 void librarian::deleteBooks() 
 { 
   
@@ -147,18 +148,18 @@ void librarian::deleteBooks()
     // Get the roll number 
     // to decide the data to be deleted 
     cout << "Enter the name of the book to be removed: "; 
-   getline(cin,name);
+    getline(cin,name);
   
     // Check if this record exists 
     while (!fin.eof())
-	 { 
+    { 
   
         row.clear(); 
         getline(fin, line); 
         stringstream s(line); 
   
-        while (getline(s, word, ', ')) 
-	{ 
+        while(getline(s, word,',')) 
+        { 
             row.push_back(word); 
         } 
   
@@ -169,19 +170,19 @@ void librarian::deleteBooks()
         // except the record to be deleted, 
         // into the new file 'booksnew.csv' 
         // using fout pointer 
-         if((name.compare(name1)) != 0) 
-	  { 
+        if((name.compare(name1)) != 0) 
+        { 
             if (!fin.eof())
-	    { 
+            { 
                 for (i = 0; i < row_size - 1; i++) 
-		{ 
+                { 
                     fout << row[i] << ", "; 
                 } 
                 fout << row[row_size - 1] << "\n"; 
             } 
         } 
         else 
-	{ 
+        { 
             count = 1; 
         } 
         if (fin.eof()) 
