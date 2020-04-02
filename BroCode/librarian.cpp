@@ -28,7 +28,7 @@ using namespace std;
 		fout<<bookname<<","<<author<<","<<bookno<<","<<num<<"\n";
 	}
 	
-    void librarian::updateBooks() 
+    void librarian::updateBooks(string name,int copies) 
     { 
   
     fstream fin, fout; 
@@ -46,15 +46,8 @@ using namespace std;
     vector<string> row; 
   
     cin.get();
-    // Get the name of the book from the user 
-    cout << "Enter the book name whose copies are to be updated:"; 
-    getline(cin,bookname);
-  
-    // Get the data to be updated 
-    cout <<"Enter the new number of copies:"; 
-    cin >> copies; 
-     
-     index=3; //index number of numer of copies of that book
+   
+     index=3; //index number of number of copies of that book
   
     int row_size;
     // Traverse the file 
