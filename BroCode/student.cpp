@@ -182,10 +182,14 @@ using namespace std;
 				<<bookname<<","
 		    	<<book[0]<<","
 		    	<<book[1]<<","
+		    	<<book[2]<<","
 		    	<<d.getDate()<<","
 		    	<<count
 		    	<<"\n";
-				cout<<"\n\tBook issued !";    
+				cout<<"\n\tBook issued !";
+
+			//saving data in issued.csv in the format
+			//email,bookname,author,id,copies,date issued,count	    
 
 			in.close();	
 			f.close();
