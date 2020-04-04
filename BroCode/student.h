@@ -28,5 +28,7 @@ class student : public person
 	string getEmail();
 
 	void issue(string emailid);
+	
+	void returnBook(string emailid);
 
 };
