@@ -195,6 +195,118 @@ using namespace std;
 			f.close();
 			fin.close();
 	}	
+
+void student::returnBook(string emailid)
+	{
+		string bookname,book_name;
+		int count=0;
+		cout<<"\n\tEnter the book name:";
+		getline(cin,bookname);
+		fstream fout,fin;
+		fout.open("issued.csv",ios::in|ios::out|ios::app);
+		bool flag1=false; //for emailid
+		bool flag2=false; //for bookname
+		int i=0;
+		string book[5];
+		string line,word;
+		vector<string> row;
+		while(!fout.eof())
+		{
+			row.clear();
+			getline(fout,line); //stores an entire row in line variable
+			stringstream s(line); //breaks into words
+			while(getline(s,word,','))
+			{
+				row.push_back(word);
+				if(i<6 && flag2==true)
+				{
+					book[i]=word;
+					i++;
+				}
+				if(bookname == row[1])
+				{
+					flag2=true;
+				}
+				if(emailid==row[0])
+				{
+					flag1=true;
+				}
+
+			}
+
+		}
+		if(flag1==true && flag2==true)
+		{
+			//user has borrowed that particular book
+			int copies=stoi(book[2]);
+			copies++;
+			librarian l;
+			Date d;
+			l.update(bookname,copies);  //update no of copies in books.csv
+			l.calcfine(book[3],d.getDate());
+			//delete line from issued.csv
+			fout.open("issued.csv",ios::in); //open existing file
+			// Create a new file to store the non-deleted data 
+			fin.open("issuednew.csv", ios::out); 
+			while(!fout.eof())
+			{
+				row.clear(); 
+       			getline(fout, line); 
+       			stringstream s(line); 
+  
+       			while(getline(s, word,',')) 
+        		{ 
+           			 row.push_back(word); 
+				} 
+				int row_size = row.size(); 
+				book_name=bookname;
+				// writing all records, 
+        		// except the record to be deleted, 
+       			// into the new file 'issuednew.csv' 
+				// using fout pointer 
+				if((bookname.compare(book_name)) != 0) 
+        		{ 
+          		  if (!fout.eof())
+         			{ 
+                		for ( int i = 0; i < row_size - 1; i++) 
+               			{ 
+                   			fin << row[i] << ", "; 
+                		} 
+               			 fin << row[row_size - 1] << "\n"; 
+           			} 
+       			} 
+       			else 
+        		{ 
+           			count = 1; 
+        		} 
+        		if (fin.eof()) 
+					break; 
+
+			}
+
+			if (count == 1) 
+       			cout << "Record deleted\n"; 
+    		else
+        		cout << "Record not found\n"; 
+  
+    		// Close the pointers 
+    		fin.close(); 
+    		fout.close(); 
+  
+    		// removing the existing file 
+    		remove("issued.csv"); 
+  
+    		// renaming the new file with the existing file name 
+			rename("issuednew.csv", "issued.csv"); 
+		}
+
+		else
+		{
+			cout<<"\n\t You have not borrowed this book.";
+		}
+
+	}
+	
 	
 
 	
