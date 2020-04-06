@@ -202,4 +202,83 @@ void librarian::deleteBooks()
   
     // renaming the new file with the existing file name 
     rename("booksnew.csv", "books.csv"); 
-}  
+} 
+
+    // This function counts number of  
+    // leap years before the given date 
+int librarian::countLeapYears(int m,int y)  
+{
+    int years = y; 
+  
+    // Check if the current year needs to be considered 
+    // for the count of leap years or not 
+    if (m <= 2)  
+    { 
+      years--; 
+    } 
+  
+        // An year is a leap year if it is a multiple of 4, 
+        // multiple of 400 and not a multiple of 100. 
+        return years / 4 - years / 100 + years / 400; 
+} 
+  
+    // This function returns number  
+    // of days between two given dates 
+int librarian::getDifference(int d1,int d2,int m1,int m2,int y1,int y2) 
+{ 
+       static int monthDays[] = {31, 28, 31, 30, 31, 30, 
+                            31, 31, 30, 31, 30, 31}; 
+        // COUNT TOTAL NUMBER OF DAYS BEFORE FIRST DATE date of issue
+  
+        // initialize count using years and day 
+       int n1 = y1 * 365 + d1; 
+  
+        // Add days for months in given date 
+       for (int i = 0; i < m1 - 1; i++)  
+       { 
+           n1 += monthDays[i]; 
+       } 
+  
+        // Since every leap year is of 366 days, 
+        // Add a day for every leap year 
+       n1 += countLeapYears(m1,y1); 
+  
+        // SIMILARLY, COUNT TOTAL NUMBER OF DAYS BEFORE date of return 
+       int n2 = y2 * 365 + d2; 
+       for (int i = 0; i < m2 - 1; i++) 
+        { 
+            n2 += monthDays[i]; 
+        } 
+        n2 += countLeapYears(m2,y2); 
+  
+        // return difference between two counts 
+        return (n2 - n1); 
+} 
+    
+    
+void librarian::calcFine(string dateIssued,string dateReturned)
+{
+   int d1,m1,y1,d2,m2,y2;
+   date d;
+   d1=d.getDay(dateIssued);
+   d2=d.getDay(dateReturned);
+   m1=d.getMonth(dateIssued);
+   m2=d.getMonth(dateReturned);
+   y1=d.getYear(dateIssued);
+   y2=d.getYear(dateReurned);
+ 
+  int no_of_days= getDifference(d1,d2,m1,m2,y1,y2);//get the no of days between the issue date and return date of a book
+  if(no_of_days<15)
+  {
+	  cout<<"\n\tNo fine on this book";  //book returned before the 15 day deadline
+  }
+  else
+  {
+	  int x=no_of_days-15;              //book has been held for more than 15 days
+	  int fine=x*5;                     //hence a fine is imposed on a RS 5 per day basis
+	  cout<<"\n\tFine is Rs: "<<fine<<" on this book";
+  }
+
+}
+   
+  
