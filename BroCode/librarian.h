@@ -19,4 +19,8 @@ class librarian
 	void addBook();
 	void updateBooks(string name,int copies);
 	void deleteBooks();
+	int countLeapYears(date d);
+	int getDifference(date dt1, date dt2) 
+	int calc
+	
 };
