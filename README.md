@@ -1,5 +1,5 @@
 # Buffer
-The buffer project series repository
+The buffer project series repository.
 Open the 'BroCode' Folder to view the source code
 ## Library Management System
 ### PROJECT DESCRIPTION  
