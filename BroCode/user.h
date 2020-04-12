@@ -1,3 +1,5 @@
+#ifndef USER_H
+#define USER_H
 #include <iterator>
 #include <boost/algorithm/string.hpp> 
 #include <map>
@@ -13,7 +15,7 @@ class user
 	
 	bool login(string email,string password,char type);
 	
-	void saveLogin(string email,string password,char type);
+	bool saveLogin(string email,string password,char type);
 
 	/* type == 's' => student
 	   type == 't' =>teacher 
@@ -21,3 +23,4 @@ class user
 	
 	bool isUnique(string email,char type);
 };
+#endif
