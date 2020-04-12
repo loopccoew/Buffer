@@ -20,7 +20,7 @@ If the user exists, he/she has to input the correct emailid and password. The pa
 
 ### DATA STRUCTURES USED
 1. Files (.csv Files ) for storing all the data
-2. Hashsmap for searching on O(1) timr. Whenver the user tries to login, the email,password stored in the file and read and stored in a hashmap. Then the input emailid and password is searched in the hashmap.
+2. Hashsmap for searching on O(1) time. Whenver the user tries to login, the <email,password> stored in the file and read and stored in a hashmap where the email is the key and the hashed password is the value. Then the input emailid and password is searched in the hashmap.
 3. Arrays for manipulating data stored in the file.
 
 ### CONTRIBUTORS OF THE PROJECT: 
