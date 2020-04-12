@@ -17,7 +17,7 @@ The Teacher and Student can :
 3. Display all books
 4. Display Profile
 
-#### The application supports log in and sign up - If the user does not exist, he/she has to create and account
+#### The application supports log in and sign up - If the user does not exist, he/she has to create an account
 #### If the user exists, he/she has to input the correct emailid and password. The passwords are stored using SHA-256.
 
 ### DATA STRUCTURES USED
