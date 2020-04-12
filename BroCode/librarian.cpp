@@ -164,7 +164,7 @@ void librarian::deleteBooks()
         } 
   
         int row_size = row.size(); 
-        name1=name;
+        name1= row[0];
   
         // writing all records, 
         // except the record to be deleted, 
@@ -258,27 +258,53 @@ int librarian::getDifference(int d1,int d2,int m1,int m2,int y1,int y2)
     
 void librarian::calcFine(string dateIssued,string dateReturned)
 {
-   int d1,m1,y1,d2,m2,y2;
-   date d;
-   d1=d.getDay(dateIssued);
-   d2=d.getDay(dateReturned);
-   m1=d.getMonth(dateIssued);
-   m2=d.getMonth(dateReturned);
-   y1=d.getYear(dateIssued);
-   y2=d.getYear(dateReurned);
+    cout<<"\n\tCalculating fine..."<<endl;
+    int d1,m1,y1,d2,m2,y2;
+    Date d;
+    d1=d.getDay(dateIssued);
+    d2=d.getDay(dateReturned);
+    m1=d.getMonth(dateIssued);
+    m2=d.getMonth(dateReturned);
+    y1=d.getYear(dateIssued);
+    y2=d.getYear(dateReturned);
  
-  int no_of_days= getDifference(d1,d2,m1,m2,y1,y2);//get the no of days between the issue date and return date of a book
-  if(no_of_days<15)
-  {
-	  cout<<"\n\tNo fine on this book";  //book returned before the 15 day deadline
-  }
-  else
-  {
-	  int x=no_of_days-15;              //book has been held for more than 15 days
-	  int fine=x*5;                     //hence a fine is imposed on a RS 5 per day basis
-	  cout<<"\n\tFine is Rs: "<<fine<<" on this book";
-  }
+    int no_of_days = getDifference(d1,d2,m1,m2,y1,y2);//get the no of days between the issue date and return date of a book
+    if(no_of_days < 15)
+    {
+        cout<<"\n\tNo fine on this book";  //book returned before the 15 day deadline
+    }
+    else
+    {     
+        int x=no_of_days-15;              //book has been held for more than 15 days
+        int fine=x*5;                     //hence a fine is imposed on a RS 5 per day basis
+        cout<<"\n\tFine is Rs: "<<fine<<" on this book";
+    }
 
 }
-   
+
+void librarian::showBooks()
+{
+    fstream fout("books.csv",ios::in);
+    vector<string> row;
+    string line,word;
+
+    while(fout)
+    {
+        row.clear(); 
+        getline(fout,line); 
+        stringstream s(line); 
   
+        while(getline(s,word,','))
+        { 
+            row.push_back(word); 
+        }
+
+        cout<<"\n\tBookname - "<<row[0];
+        cout<<"\n\tAuthor - "<<row[1];
+        cout<<"\n\tBook ID - "<<row[2];
+        cout<<"\n\tNumber of copies available - "<<row[3]<<endl;
+        cout<<"----------------------------------------------------------\n"; 
+    }
+
+    fout.close();    
+}
