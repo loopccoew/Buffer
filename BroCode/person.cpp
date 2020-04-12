@@ -7,11 +7,6 @@ using namespace std;
 		email = " ";
 	}
 
-	person::person(string name,string email)
-	{
-		this->name = name;
-		this->email = email;
-	}
 
 	void person::show()
 	{
@@ -19,10 +14,8 @@ using namespace std;
 		cout<<"\n\tEmail id : "<<email;
 	}
 
-	void person::input()
+	void person::input(string name,string email)
 	{
-		cout<<"\n\tEnter name"<<endl;
-		getline(cin,name);
-		cout<<"\n\tEnter email id"<<endl;
-		getline(cin,email);
+		this->name = name;
+		this->email = email;
 	}
