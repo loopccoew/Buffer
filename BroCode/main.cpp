@@ -3,8 +3,10 @@ Hence compile as g++ -std=c++0x file1.cpp file2.cpp filen.cpp */
 //#include "librarian.h"
 #include "student.h"
 #include "user.h"
+#include "teacher.h"
 #include <iostream>
 #include <fstream>
+#include <string>
 using namespace std;
 int main(int argc, char const *argv[])
 {
@@ -32,7 +34,7 @@ int main(int argc, char const *argv[])
 					<<"\n\t2. Update a book"
 					<<"\n\t3. Remove a book"
 					<<"\n\t4. Calculate Fine"
-					<<"\n\t5. Display all users"
+					<<"\n\t5. Show All Books"
 					<<"\n\t6. Exit"<<endl;
 				
 				librarian l;
@@ -62,11 +64,18 @@ int main(int argc, char const *argv[])
 						break;
 
 						case 4:
-						cout<<"\n\tFunction yet to be written";
+						{	
+							cout<<"\n\tEnter issue date in dd/mm/yyyy format "<<endl;
+							string id,rd;
+							getline(cin,id);
+							cout<<"\n\tEnter return date in dd/mm/yyyy format"<<endl;
+							getline(cin,rd);
+							l.calcFine(id,rd);
+						}							
 						break;
 
 						case 5:
-						cout<<"\n\tFunction yet to be written";
+						l.showBooks();
 						break;
 
 						case 6:
@@ -118,7 +127,8 @@ int main(int argc, char const *argv[])
 						cout<<"\n\t1. Show my profile";
 						cout<<"\n\t2. Issue a book";
 						cout<<"\n\t3. Return a book";
-						cout<<"\n\t4. Exit";
+						cout<<"\n\t4. Show all Books";
+						cout<<"\n\t5. Exit";
 						cin>>ch2;
 
 						switch(ch2)
@@ -132,10 +142,14 @@ int main(int argc, char const *argv[])
 							break;
 
 							case 3:
-							cout<<"\n\tFunction yet to be written";
+							s.returnBook(email);
 							break;
 
 							case 4:
+							s.showBooks();
+							break;
+
+							case 5:
 							cout<<"\n\tExiting..";
 							break;
 
@@ -143,7 +157,7 @@ int main(int argc, char const *argv[])
 							cout<<"\n\tPlease choose a valid option";
 							break;
 						}
-					}while(ch2 != 4);
+					}while(ch2 != 5);
 				}
 				
 				break;
@@ -151,12 +165,25 @@ int main(int argc, char const *argv[])
 				case 2:		// sign up
 				{
 					student s;
-					string password;
-					s.input();
+					string password,name,email,cnum,dept;
+					int year;
+					cout<<"\n\tEnter name"<<endl;
 					cin.get();
-					cout<<"\n\tEnter a password";
+					getline(cin,name);
+					cout<<"\n\tEnter email id"<<endl;
+					getline(cin,email);
+					cout<<"\n\tEnter dept:"<<endl;
+					getline(cin,dept);
+					cout<<"\n\tEnter cnum:"<<endl;
+					getline(cin,cnum);
+					cout<<"\n\tEnter year:"<<endl;
+					cin>>year;
+					cout<<"\n\tEnter a password"<<endl;
+					cin.get();
 					getline(cin,password);
-					u.saveLogin(s.getEmail(),password,'s');
+					s.input(name,email,password,dept,cnum,year);
+					
+					
 				}
 				break;					
 			}
@@ -191,7 +218,7 @@ int main(int argc, char const *argv[])
 					}while(u.login(email,password,'t') == false);
 					
 					cout<<"\n\tWelcome, "<<email<<" !"<<endl;
-					//teacher t;
+					teacher t;
 					int ch2;
 					do
 					{
@@ -199,24 +226,29 @@ int main(int argc, char const *argv[])
 						cout<<"\n\t1. Show my profile";
 						cout<<"\n\t2. Issue a book";
 						cout<<"\n\t3. Return a book";
+						cout<<"\n\t4. Show All books";
 						cout<<"\n\t4. Exit";
 						cin>>ch2;
 
 						switch(ch2)
 						{
 							case 1:
-							//t.show();
+							t.show(email);
 							break;
 
 							case 2:
-							//t.issue(email);
+							t.issue(email);
 							break;
 
 							case 3:
-							cout<<"\n\tFunction yet to be written";
+							t.returnBook(email);
 							break;
 
 							case 4:
+							t.showBooks();
+							break;
+
+							case 5:
 							cout<<"\n\tExiting..";
 							break;
 
@@ -224,14 +256,31 @@ int main(int argc, char const *argv[])
 							cout<<"\n\tPlease choose a valid option";
 							break;
 						}
-					}while(ch != 4);
+					}while(ch != 5);
 
 				}
 				break;
 
 				case 2:		// sign up
 				{
-
+					teacher t;
+					string password,name,email,dept,designation;					
+					cout<<"\n\tEnter name"<<endl;
+					cin.get();
+					getline(cin,name);
+					cout<<"\n\tEnter email id"<<endl;
+					getline(cin,email);
+					cout<<"\n\tEnter dept:"<<endl;
+					getline(cin,dept);
+					cout<<"\n\tEnter designation:"<<endl;
+					getline(cin,designation);
+					cout<<"\n\tEnter a password"<<endl;
+					cin.get();
+					getline(cin,password);
+					t.input(name,email,password,dept,designation);
+					
+					
+					
 				}
 				break;					
 			}
