@@ -56,30 +56,41 @@ using namespace std;
 
 	}
 
-	void user::saveLogin(string email,string password,char type)
+	bool user::saveLogin(string email,string password,char type)
 	{
-		//hashing the password using sha256
-		string hash = picosha2::hash256_hex_string(password);
-
-		//open file in which all the passwords are stored
-		//we have to write to the file here
-		//hence creating an object of ofstream
-		ofstream out("password.txt",ios::out|ios::app);
-
-		if(!out.is_open())
+		if(isUnique(email,type))
 		{
-			cout<<"\n\tError - File is not open";
-			return;
+			//hashing the password using sha256
+			string hash = picosha2::hash256_hex_string(password);
+
+			//open file in which all the passwords are stored
+			//we have to write to the file here
+			//hence creating an object of ofstream
+			ofstream out("password.txt",ios::out|ios::app);
+
+			if(!out.is_open())
+			{
+				cout<<"\n\tError - File is not open";
+				return false;
+			}
+			else
+			{	//write the email and password to file
+				out<<email;
+				out<<type;
+				out<<":";
+				out<<hash;
+				out<<"\n";
+				out.close();
+				return true;
+			}	
 		}
-
-		//write the email and password to file
-		out<<email;
-		out<<type;
-		out<<":";
-		out<<hash;
-		out<<"\n";
-
-		out.close();	
+		else
+		{
+			cout<<"\n\tUser already exists"<<endl;
+			return false;
+		}
+		
+			
 	}
 
 	bool user::isUnique(string email,char type)
@@ -110,15 +121,15 @@ using namespace std;
 
 		map<string,string>::iterator it;
 
-		/* 
-			Display hashmap for debugging purpose
+		
+			/*Display hashmap for debugging purpose
 
 			for(it = hashmap.begin(); it != hashmap.end(); it++)
 			{
 				cout<<it->first<<endl;
 				cout<<it->second<<endl;
-			} 
-		*/
+			} */
+		
 
 		it = hashmap.find(email);	//search for the key
 		if(it == hashmap.end())
