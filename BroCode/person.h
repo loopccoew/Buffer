@@ -1,3 +1,5 @@
+#ifndef PERSON_H
+#define PERSON_H
 #include <iostream>
 using namespace std;
 class person
@@ -13,7 +15,8 @@ class person
 	person();
 	
 	void show();
-	void input();
+	void input(string name,string email);
 	//~person();
 	
 };
+#endif
