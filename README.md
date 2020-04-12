@@ -10,13 +10,15 @@ The Librarian can :
 3. Delete Book
 4. Display All books
 5. Calculate Fine
+
 The Teacher and Student can :
 1. Issue a book
 2. Return a book
 3. Display all books
 4. Display Profile
-The application supports log in and sign up - If the user does not exist, he/she has to create and account
-If the user exists, he/she has to input the correct emailid and password. The passwords are stored using SHA-256.
+
+#### The application supports log in and sign up - If the user does not exist, he/she has to create and account
+#### If the user exists, he/she has to input the correct emailid and password. The passwords are stored using SHA-256.
 
 ### DATA STRUCTURES USED
 1. Files (.csv Files ) for storing all the data
