@@ -3,27 +3,24 @@ using namespace std;
 
 	teacher::teacher()
 	{
-		
-		cnum = " ";
-		
+		dept = " ";
+		designation = " ";
 	}	
 
-	void teacher::input()
+	void teacher::input(string name,string email,string password,string dept,string designation)
 	{
+		user u;
 		fstream fout;
-		fout.open("library.csv",ios::out | ios::app);
-		cout<<"\n\tEnter your details:";
-		person::input();		
-	
-		cout<<"\n\tEnter cnum:";
-		getline(cin,cnum);
-		
-
-		fout<<cnum<<","
-			<<email<<","
+		fout.open("teacher.csv",ios::out | ios::app);
+		person::input(name,email);				
+		if(u.saveLogin(email,password,'t'))
+		{	
+			fout<<email<<","
 			<<name<<","
+			<<dept<<","
+			<<designation<<"\n";
+		}
 			
-
 		fout.close();
 	}
 
@@ -31,11 +28,10 @@ using namespace std;
 	{
 		
 		fstream fout;
-		fout.open("library.csv", ios::in);
+		fout.open("teacher.csv", ios::in);
 		vector<string> row;
 		string line,word;
-		int flag = 0;	// record not found=0
-
+		int flag = 0;	// 0 indicates record not found
 		while(fout)
 		{
 
@@ -47,17 +43,18 @@ using namespace std;
 				row.push_back(word);
 			}
 
-			if(emailid == row[1])
+			if(emailid == row[0])
 			{
 
 				flag = 1;	//record found
-				cout<<"\n\t Teacher Details : "<<endl;
-				cout<<"\n\tEmail id : "<<row[1];
-				cout<<"\n\tC Number : "<<row[0];
-				cout<<"\n\tName : "<<row[2];
-			
+				cout<<"\n\tteacher Details : "<<endl;
+				cout<<"\n\tEmail id : "<<row[0];
+				cout<<"\n\tName : "<<row[1];
+				cout<<"\n\tDepartment : "<<row[2];
+				cout<<"\n\tDesignation : "<<row[3]<<endl;
 				break;
 			}
+			
 
 		}
 
@@ -67,11 +64,7 @@ using namespace std;
 		}
 
 		fout.close();
-	}
-
-	string teacher::getEmail()
-	{
-		return email;
+		
 	}
 
 	void teacher::issue(string emailid)
@@ -185,7 +178,7 @@ using namespace std;
 				cout<<"\n\tBook issued !";
 
 			//saving data in issued.csv in the format
-			//email,bookname,author,id,copies,date issued,count	    
+			//email,bookname,author,id,copies,date issued	    
 
 			in.close();	
 			f.close();
@@ -197,57 +190,51 @@ void teacher::returnBook(string emailid)
 		string bookname,book_name;
 		int count=0;
 		cout<<"\n\tEnter the book name:";
+		cin.get();
 		getline(cin,bookname);
 		fstream fout,fin;
 		fout.open("issued.csv",ios::in|ios::out|ios::app);
-		bool flag1=false; //for emailid
-		bool flag2=false; //for bookname
-		int i=0;
-		string book[5];
+		bool flag = false; 
+		string book[6] = {" "," "," "," "," "," "};
 		string line,word;
 		vector<string> row;
 		while(!fout.eof())
 		{
-			row.clear();
+			int i = 0;
 			getline(fout,line); //stores an entire row in line variable
 			stringstream s(line); //breaks into words
 			while(getline(s,word,','))
-			{
-				row.push_back(word);
-				if(i<6 && flag2==true)
-				{
-					book[i]=word;
-					i++;
-				}
-				if(bookname == row[1])
-				{
-					flag2=true;
-				}
-				if(emailid==row[0])
-				{
-					flag1=true;
-				}
-
+			{	
+				book[i] = word;
+				i++;
 			}
 
+			if(bookname.compare(book[1]) == 0 && emailid.compare(book[0]) == 0)
+			{					
+				flag = true;
+				break;
+			}
+			
+
 		}
-		if(flag1==true && flag2==true)
+
+		if(flag == true)
 		{
-			//user has borrowed that particular book
-			int copies=stoi(book[2]);
+			int copies = stoi(book[4]);
 			copies++;
 			librarian l;
 			Date d;
-			l.update(bookname,copies);  //update no of copies in books.csv
-			l.calcfine(book[3],d.getDate());
+			l.updateBooks(bookname,copies);  //update no of copies in books.csv
+			l.calcFine(book[5],d.getDate());
+
 			//delete line from issued.csv
-			fout.open("issued.csv",ios::in); //open existing file
+			fstream f("issued.csv",ios::in);
 			// Create a new file to store the non-deleted data 
 			fin.open("issuednew.csv", ios::out); 
-			while(!fout.eof())
+			while(!f.eof())
 			{
 				row.clear(); 
-       			getline(fout, line); 
+       			getline(f, line); 
        			stringstream s(line); 
   
        			while(getline(s, word,',')) 
@@ -255,38 +242,42 @@ void teacher::returnBook(string emailid)
            			 row.push_back(word); 
 				} 
 				int row_size = row.size(); 
-				book_name=bookname;
+
+
 				// writing all records, 
         		// except the record to be deleted, 
        			// into the new file 'issuednew.csv' 
-				// using fout pointer 
-				if((bookname.compare(book_name)) != 0) 
+				// using f pointer
+				 
+				if(bookname.compare(row[1]) != 0 || emailid.compare(row[0]) != 0) 
         		{ 
-          		  if (!fout.eof())
+          		  if (!f.eof())
          			{ 
                 		for ( int i = 0; i < row_size - 1; i++) 
                			{ 
-                   			fin << row[i] << ", "; 
+                   			fin<<row[i]<< ","; 
                 		} 
-               			 fin << row[row_size - 1] << "\n"; 
+               			 fin <<row[row_size - 1]<< "\n"; 
            			} 
        			} 
        			else 
         		{ 
            			count = 1; 
-        		} 
+        		}
+
         		if (fin.eof()) 
 					break; 
 
 			}
 
 			if (count == 1) 
-       			cout << "Record deleted\n"; 
+       			cout << "\n\tReturn Successful\n"; 
     		else
-        		cout << "Record not found\n"; 
+        		cout << "\n\tReturn not Successful\n"; 
   
     		// Close the pointers 
     		fin.close(); 
+    		f.close();
     		fout.close(); 
   
     		// removing the existing file 
@@ -301,4 +292,10 @@ void teacher::returnBook(string emailid)
 			cout<<"\n\t You have not borrowed this book.";
 		}
 
+	}
+
+	void teacher::showBooks()
+	{
+		librarian l;
+		l.showBooks();
 	}
