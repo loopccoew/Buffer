@@ -1,5 +1,7 @@
-
+#ifndef TEACHER_H
+#define TEACHER_H
 #include "date.h"
+#include "user.h"
 #include "person.h"
 #include "librarian.h"
 #include <cmath>
@@ -14,22 +16,21 @@ class teacher : public person
 {
 	private:
 
-	
-	string cnum;
-	
+	string dept;
+	string designation;
 
 	public:
 
 	teacher();
 
-	void input();
+	void input(string name,string email,string password,string dept,string designation);
 
 	void show(string emailid);
-
-	string getEmail();
 
 	void issue(string emailid);
 	
 	void returnBook(string emailid);
 
+	void showBooks();
 };
+#endif
