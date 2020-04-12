@@ -2,7 +2,7 @@
 The buffer project series repository
 ## Library Management System
 ### PROJECT DESCRIPTION  
-A library Management system for teachers, students and a librarian.
+A library Management system for teachers, students and librarian.
 There are three types of users - teacher,student and librarian.
 The Librarian can :
 1. Add Books
