@@ -1,9 +1,12 @@
-#include<iostream>
-#include<string>
+#ifndef LIBRARIAN_H
+#define LIBRARIAN_H
+#include "date.h"
+#include <iostream>
+#include <string>
 #include <fstream>
 #include <sstream>
 #include <vector>
-using std::string;
+using namespace std;
 class librarian
 {
 	private:
@@ -21,6 +24,7 @@ class librarian
 	void deleteBooks();
 	int  countLeapYears(int m,int y);
 	int getDifference(int d1,int d2,int m1,int m2,int y1,int y2);
-	int calcFine(string dateIssued,string dateReurned);
-	
+	void calcFine(string dateIssued,string dateReturned);
+	void showBooks();
 };
+#endif
