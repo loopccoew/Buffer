@@ -6,29 +6,29 @@ import java.awt.event.*;
 import javax.swing.*;
 import javafx.scene.control.PasswordField;
 import java.util.*;
-class node      
+class node      // Class node for entities of students
 {
  node right,left;
  String name;
  int rollno;
  int attend;
 }
-class bst
+class bst  // Class bst to implement Binary search tree
 {
- node root;
+ node root;  // Root of the tree of type node
  node H[] = new node[50];
  node H1[] = new node[50];
 String[] a = new String[10];
   int no;
   int cnt;
- bst()
+ bst()  // default constructor 
  {
   root =null;
   no = 0;
   cnt=0;
  }
  
- void insert(String n,int r,int at)
+ void insert(String n,int r,int at) // Function definition to insert students' deatils in a Binary search tree
  {
   node prev,ptr,cur;
   int flag=0;
@@ -80,7 +80,7 @@ String[] a = new String[10];
   }
  
  }
- node search(String n,int r)
+ node search(String n,int r)  // Function definition to search for a student and return it
  {
   node cur;
   cur=root;
@@ -109,7 +109,7 @@ String[] a = new String[10];
    return null;
   }
  }
- void inorder(node localroot)//Recursive Inorder Traversal
+ void inorder(node localroot)// Function Definition for Recursive Inorder Traversal
  {
   if(localroot!=null)
   {
@@ -118,7 +118,7 @@ String[] a = new String[10];
    inorder(localroot.right);
   }
  }
- node update(String nm,int r)
+ node update(String nm,int r) // Function definition to update attendance of a student and return the updated value
  {
   node cur;
   cur=root;
@@ -150,7 +150,7 @@ String[] a = new String[10];
  }
  
 
-void downadjustment(int i)
+void downadjustment(int i)  // Function definition for down adjacement in heap
 {
 int smallest =i;
 int l=2*i;
@@ -172,7 +172,7 @@ downadjustment(smallest);
 }
 }
 
-void BuildHeap()  
+void BuildHeap()  // Function definition to build a heap
 {
 int i=0;
 for(i=no/2;i>0;i--)
@@ -189,7 +189,7 @@ delete();
 }
 }
  
-void delete()
+void delete()  // Function Definition to delete entry of a particular student
 {
 if(H[2*1] == null && H[2*1+1] == null)
 {
@@ -213,7 +213,7 @@ H1[i]=H[i];
 }
 }
 
-void display()
+void display()  // Function Definition to display the DEFAULTER'S LIST
 {
 System.out.println("\n\t Students in defaulters list : ");
 for(int i=0;i<cnt;i++)
@@ -224,14 +224,14 @@ System.out.println(a[i]);
 }
 
 
-class att implements ActionListener
+class att implements ActionListener // Class for Graphics section
 {
- JFrame f1;
+ JFrame f1; //  Frame
  JFrame f2;
  JFrame f3;
  JFrame f4;
  JFrame f5;
- JPasswordField pf1;
+ JPasswordField pf1;  // Password Field 
  JTextArea ta;
  JPanel p1 ,p2,p3,p4,p5;
  JTextField t1,t2,t3,t4,t5,t6;
@@ -347,9 +347,9 @@ class att implements ActionListener
   p5.add(ta);
   f1.setVisible(true);
  }
- public static void main(String args[])
+ public static void main(String args[])  // Main Section
  {
-  new att();
+  new att(); // Calling object for class att;
 
  }
  @SuppressWarnings("unlikely-arg-type")
