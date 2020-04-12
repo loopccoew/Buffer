@@ -180,7 +180,7 @@ downadjustment(i);
 for(int j=1;j<=no;j++)
 {
 H1[j]=H[j];
-if(H1[j].attend<1)
+if(H1[j].attend<1)    //Minimum attendance is considered 1 here as a sample case but can be set to 75% of the complete attendance in practical case
 {
 delete();
 }
