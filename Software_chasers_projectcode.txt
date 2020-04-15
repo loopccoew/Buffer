@@ -1,0 +1,790 @@
+/*
+    Team Members : 
+           Akshata Bondarde
+           Mahima Makakwade
+
+
+    Objective  : 
+           The main objective of developing this project is to automate student result management. 
+           This application will greatly simplify and speed up the result preparation and management process.
+
+
+    Features     :
+            Quickly student records can be search
+            Works for both student and administrator
+            Various operations can be performed on student records
+            Gives the list of failed students
+
+
+    Data structure.   :  Hash Map
+
+
+    Team Members  Contribution :
+             Akshata Bondarde : Programmer
+             Mahima Makakwade : Project Manager
+
+
+
+*/
+
+
+package project;
+
+import java.util.*;
+import java.io.*;
+ 
+class admin extends Exception       //CLASS ADMIN
+{
+//DECLARING MEMBER VARIABLES
+ private int nstudents;      
+ int nsub;
+ public String sub[];
+ private Student[] stu;          
+ int count;
+ 
+ admin()           //CONSTRUCTOR
+ {
+  count=0;
+  nstudents = 0;
+  nsub = 0;
+ }
+ 
+           Scanner scan = new Scanner(System.in);    //CREATING THE OBJECT OF SCANNER CLASS
+ 
+ 
+           HashMap<Integer,Student> map = new HashMap<>();     //HASHTABLE 
+ 
+ void create()                         //CREATE FUNTION TO ACCEPT THE NUMBER OF SUBJECTS AND STUDENTS  
+ {
+	  do
+	  {
+	   System.out.print("\n ENTER NUMBER OF STUDENTS : ");     //ASKING THE NUMBER OF STUDENTS IN THE CLASS
+	   nstudents = scan.nextInt();
+	  
+	  }while(nstudents < 0 || nstudents > 90);           //VALIDATION FOR ACCEPTING THE CURRENT NUMBER OF STUDENTS
+	
+	  stu = new Student[nstudents+1];
+	 
+	 
+	 do
+	 {
+	   System.out.print("\n ENTER NUMBER OF SUBJECTS : ");       //ASKING THE NUMBER OF SUBJECTS
+	   nsub = scan.nextInt();
+	  
+	 }while(nsub < 4 || nsub > 8);             //VALIDATIONS FOR ENTERING THE CURRECT NUMBER OF SUBJECTS
+	  
+	  sub = new String[nsub];
+	 
+	  int flag = 0;
+	  
+	  for(int i=0;i<nsub;i++)
+	  {
+		  do
+		  {
+			  flag=0;
+			  System.out.print("\n ENTER THE "  + (i+1) + "SUBJECT NAME : "); 
+			  sub[i] = scan.nextLine();
+			  sub[i] = scan.nextLine();
+			  
+			  sub[i] = sub[i].toUpperCase();
+			  
+			  for(int j=0;j<sub[i].length();j++)
+			  {
+				  if(sub[i].charAt(j) != ' ' && (sub[i].charAt(j) < 'A' || sub[i].charAt(j) > 'Z') )
+				  {
+					  flag=1;
+					  break;
+				  }
+			  }
+			  
+			  if(flag==1)
+			  {
+				  System.out.print("\n SUBJECT NAME CANNOT CONTENT NUMBERS OR SPECIAL CHARACTERS!! ");
+			  }
+		  }while(flag != 0);
+		  
+	  }
+   
+ }
+ 
+ void insert()              //INSERT FUNCTION FOR INSRTING THE STUDENT INFORMATION
+ {
+ int ch=0;
+ int temp=0;
+ int flag=0;
+ int roll=0;
+ do
+ {
+  do
+  {
+	  	flag=0;
+	  	System.out.print("\n ENTER THE 4 DIGIT ROLL NO : ");        //ASKING THE ROLL NUMBER OF STUDENT
+	  	roll   = scan.nextInt();
+
+	     int count=0;
+	     int tem = roll;
+	     while(tem!=0)
+	     {
+	      tem = tem /10;
+	      count++;  
+	     }
+	    
+	     if(count != 4)         //VALIDATIONS FOR ENTERING ONLY FOUR DIGIT NUMBER 
+	     {
+	      flag = 1;
+	     }
+	    
+	     if(flag == 0)
+	     {
+	      temp = roll%100;
+	      if(temp <= 0 || temp > nstudents)
+	      {
+	       flag = 1;
+	      }
+	      
+	      if(map.containsKey(roll))            //CHECKING IF IT CONTAINS THAT ROLL NUMBER         
+	      {
+	           System.out.print("\n TWO STUDENTS CANNOT HAVE THE SAME ROLL NUMBER...");
+	           flag=1;
+	      }
+     
+     
+  
+    }
+  
+   }while(flag == 1);
+   
+   //CREATING STUDENT CLASS OBJECT TO STORE DETAILS OF POVIDED ROLL NUMBER
+   stu[temp] = new Student(nsub,sub);
+   stu[temp].rollno = roll;
+   stu[temp].accept();                      //ACCEPTING THE DATA BY CALLING accept() FUNCTION
+   map.put(roll,stu[temp]);                 // INSERTING THE OBJECT IN HASH MAP
+  
+  
+   System.out.print("\n 1. ADD MORE ");                     //ASKING FOR USER'S CHOICE
+   System.out.print("\n 2. EXIT ");
+   ch = scan.nextInt();
+ 
+   if(ch >2 || ch < 1)
+   {
+	   System.out.print("\n INVALID INPUT...");
+   }
+   
+ }while(ch == 1);
+
+ }
+ 
+  void display()               //FUNCTION TO DISPLAY THE DATA
+  {
+    int roll;
+    System.out.print("\n ENTER THE ROLL NO : ");
+    roll = scan.nextInt();
+     if(map.containsKey(roll))            //CHECKING IF IT CONTAINS THAT ROLL NUMBER         
+     {
+      Student temp1 = map.get(roll);            // GETTING THE STUDENT OBJECT OF THE PROVIDED KEY
+      temp1.display1();                       //CALLING THE display() FUNCTION
+     }
+     else
+    {
+     System.out.print("\n SORRY!! NO RECORD PRESENT FOR ROLL NUMBER  : " + roll);
+    }
+     
+  }
+ 
+ 
+  void report_card()              //FUNCTION FOR REPORT CARD
+  {
+   int roll;
+    System.out.print("\n ENTER THE ROLL NO : ");
+    roll = scan.nextInt();
+     if(map.containsKey(roll))                   //CHECKING IF ROLL NO IS PRESENT OR NOT IN HASH MAP
+     {
+      Student temp1 = map.get(roll);			 // GETTING THE STUDENT OBJECT OF THE PROVIDED KEY
+      temp1.report();
+     }
+     else
+    {
+     System.out.print("\n SORRY!! NO RECORD PRESENT FOR ROLL NUMBER  : " + roll);
+    }
+  }
+ 
+ 
+  void delete()           //DELETE FUNTION FOR DELETING THE STUDENT INFORMATION
+ {
+  int roll;
+  System.out.print("\n ENTER THE ROLL NO : ");
+  roll = scan.nextInt();
+  
+  if(map.containsKey(roll))                   //CHECKING IF ROLL NO IS PRESENT OR NOT IN HASH MAP
+  {
+   map.remove(roll);
+   System.out.print("\nROLL NUMBER : "+roll+ "      :  DELETED");
+  }
+  else
+  {
+   System.out.print("\n DELETION UNSUCCESSFUL...");
+   System.out.print("\n SORRY!! NO RECORD PRESENT FOR ROLL NUMBER  : " + roll);
+  }
+  
+  
+ }
+ 
+  
+  
+  
+ void update()                //UPDATE FUNCTION TO UPDATE ANY STUDENTS MARKS
+ {
+  int roll;
+  System.out.print("\n ENTER THE ROLL NO : ");
+  roll = scan.nextInt();
+  if(map.containsKey(roll))				   //CHECKING IF ROLL NO IS PRESENT OR NOT IN HASH MAP
+  {
+   Student temp1 = map.get(roll);			 // GETTING THE STUDENT OBJECT OF THE PROVIDED KEY
+   temp1.display1();
+   int ch=0;
+   
+   do
+   {
+    for(int i=0;i<nsub;i++)
+    {
+     System.out.println((i+1)+" "+sub[i]);       //DISPLAYING THE SUBJECTS LIST           
+    }
+    
+    System.out.println((nsub+1) +"  EXIT. ");
+    System.out.print("\n ENTER YOUR CHOICE : ");
+    ch=scan.nextInt();
+    
+    if(ch > (nsub+1))
+    {
+     System.out.println("\n INVALID INPUT....");
+    
+    }
+    else if(ch >0 && ch <= nsub)
+    {
+     int ch1=0;                             
+     System.out.println("1. T1");                   //ASKING WHICH EXAMS MARKS WANT TO UPDATE
+     System.out.println("2. T2");
+     System.out.println("3. ESE"); 
+     System.out.print("\n ENTER YOUR CHOICE : ");
+     ch1=scan.nextInt();
+     
+     if(ch1 > 0 && ch1<=3)
+     {
+      temp1.update_sub(ch,ch1);                       
+      temp1.display1();
+     }
+     else
+     {
+      System.out.println("\n INVALID INPUT....");
+     
+     }
+     
+    }
+    
+    
+    
+   }while(ch != (nsub+1));
+   
+  } 
+  else
+  {
+   System.out.print("\n RECORD FOR ROLL NO : " + roll + " IS NOT PRESENT...");
+  }
+   
+ }
+ 
+ void failed_list()                  //FUCTION TO DISPLAY THE LIST OF STUDENTS WHICH ARE FAILED
+ {
+	 if(map.isEmpty())
+	 {
+		 System.out.print("\n STUDENTS RECORDS ARE NOT PRESENT...");
+	 }
+	 else
+	 {
+		  Set<Integer> keys = map.keySet();
+		  for(Integer p:keys)
+		  {
+		    Student temp = map.get(p);
+		    //System.out.print("\n ROLL NUMBER : " + p);
+		    temp.failed();
+		    
+		  }
+   
+	 }
+  }
+   
+    }
+    
+
+//USER DEFINED CLASS FOR STUDENTS
+class Student
+{
+     // MEMBER VARIABLES
+     int rollno;
+     String name;
+     String c_no;
+     float marks[][];   //matrix to store marks for each subject
+     int nsub;
+     float total;         //variable for total marks obtained
+     String[] sub_name;
+     String grade = "";
+     
+     // Constructor
+     public Student(int nsub, String[] sub)
+     {
+         this.rollno=0;
+         this.name = "";
+         c_no = "";
+         this.nsub = nsub;
+         marks = new  float[nsub][5];
+         total = 0;
+         this.sub_name = sub;
+         grade = "";
+     }
+
+     //CREATING OBJECT OF SCANNER CLASS
+     Scanner scan = new Scanner(System.in);
+    
+     
+     //FUNCTION TO ACCEPT THE DEATILS FOR this STUDENT
+     void accept()
+     {
+      
+    
+    int flag1 = 0;
+    do
+    {
+      //ACCEPTING STUDENT INFORMATION
+        System.out.print("\n\n ENTER THE C NUMBER : ");
+        c_no = scan.next();
+        c_no.toUpperCase();
+        flag1 = 0;
+        
+        for(int i=1;i<c_no.length();i++)
+        {
+        if(c_no.charAt(i) < '0' || c_no.charAt(i) > '9')
+            {
+            flag1 =1; //SET THE FLAG
+            break;//BREAKING THE LOOP
+            }
+        }
+        
+        if(flag1 == 1)
+        System.out.print("\n C NUMBER CANNOT CONTAIN ALPHABETS OR SPECIAL CHARACTERS OTHER THAN C AS FIRST CHARACTER");
+        
+        if(c_no.charAt(0) != 'C' && c_no.charAt(0) != 'c')
+        {
+            flag1=1;
+            System.out.print("\n INVALID INPUT...FIRST CHARACTER SHOULD BE C");
+        }
+        
+        if(c_no.length() != 12)
+        {
+        	flag1=1;
+            System.out.print("\n INVALID INPUT...C NUMBER SHOULD CONTENT 12 CHARACTERS ");
+        }
+        
+    }while(flag1 == 1);    
+        
+        int flag=0;
+        do
+        { 
+        //ACCEPTING THE STUDENTS NAME
+        System.out.print("\n ENTER THE NAME : ");
+        name = scan.nextLine();
+        name = scan.nextLine();
+        
+        //CONVERTING NAME TO UPPERCASE
+        name = name.toUpperCase();
+        flag=0; //RESETTING THE FLAG
+        
+        //LOOPING OVER NUMBER OF CHARACTERS IN NAME
+        for(int i=0;i<name.length();i++)
+        {
+        //IF NAME DOES NOT CONTENT ALPHABETS THEN SET THE FLAG
+            if(name.charAt(i) < 'A' || name.charAt(i) > 'Z')
+            {
+            flag =1; //SET THE FLAG
+            break;//BREAKING THE LOOP
+            }
+        }
+        
+        //IF FLAG IS SET THEN PRINT THE STATEMENT
+        if(flag == 1)
+        System.out.print("\n NAME CANNOT CONTAIN NUMBERS OR SPECIAL CHARACTERS ");
+        
+        
+        }while(flag ==1);  //VALIDATING THE FLAG
+        
+         System.out.print("\n\n ENTER THE FOLLOWING DEATILS : ");
+      
+         //LOOPING OVER TOTAL NUMBER OF SUBJECTS
+         for(int i=0;i<nsub;i++)
+         {
+          // GETTING MARKS FOR THE SUBJECT
+            System.out.print("\n\n ENTER DEATILS OF SUBJECT : " + sub_name[i]);
+            
+            
+            do
+            {
+            System.out.print("\n\n ENTER MARKS OBTAINED IN T1 : ");
+            marks[i][0] = scan.nextFloat();
+            
+            }while(marks[i][0] < 0 || marks[i][0] >25);  //VALIDATING WHETHER THE MARKS PROVIDED ARE CORRECT OR NOT
+            
+            do
+            {
+            System.out.print("\n ENTER MARKS OBTAINED IN T2 : ");
+            marks[i][1] = scan.nextFloat();
+            
+            }while(marks[i][1] < 0 || marks[i][1] >25);//VALIDATING WHETHER THE MARKS PROVIDED ARE CORRECT OR NOT
+         
+            do
+            {
+            System.out.print("\n ENTER MARKS OBTAINED IN ESE : ");
+            marks[i][2] = scan.nextFloat();
+            
+            }while(marks[i][2] < 0 || marks[i][2] >50);  //VALIDATING WHETHER THE MARKS PROVIDED ARE CORRECT OR NOT
+            
+            marks[i][3] = marks[i][0] + marks[i][1]  + marks[i][2];
+            
+            //COMPUTING OVERALL TOTAL MARKS OBTAINED
+            total = total + marks[i][3]; 
+         }
+     }
+    
+     
+     //function to display the information about this student
+    void display1()
+    {
+    
+        //displaying the info
+      System.out.print("\n  THE NAME : " + name);
+      System.out.print("\n  THE ROLL NUMBER : " + rollno);
+      System.out.print("\n THE C NUMBER : " + c_no);
+      System.out.print("\n_______________________________________________________________________________________________________________________");
+          System.out.println();
+          System.out.format("%42s %10s %8s %8s %8s %8s", "NAME","         ","T1","T2","ESE","TOTAL");
+          System.out.print("\n_______________________________________________________________________________________________________________________");
+          System.out.println();
+        
+          //printing the marks for each subject
+          
+          //looping over number of subjects
+          for(int i=0;i<nsub;i++)
+          {
+           System.out.format("%42s %10s %8d %8d %8d %8d", sub_name[i],"          ",(int)marks[i][0],(int)marks[i][1],(int)marks[i][2],(int)marks[i][3]);
+           System.out.println();
+          }
+          System.out.print("\n_______________________________________________________________________________________________________________________");
+          System.out.println();
+    }
+   
+    // FUNCTION TO UPDATE THE MARKS OF PROVIDED SUBJECT FOR this STUDENT
+    void update_sub(int s,int e)
+    {
+         int flag=0;
+    do
+    {
+    flag=0;
+    // GETTING UPDATED MARKS FROM USER 
+    System.out.println("\n ENETER THE UPDATED MARKS CORRECTLY : ");
+    marks[s-1][e-1] = scan.nextInt();
+    
+    //VALIDATING WHETHER THE PROVIDED MARKS IS APPROPRIATE OR NOT
+    if((e == 1 || e==2) && (marks[s-1][e-1] < 0 || marks[s-1][e-1] > 25))
+    {
+    flag=1;
+    }
+    else if(e == 3 && marks[s-1][e-1] < 0 || marks[s-1][e-1] > 50)
+    {
+    flag=1;
+    }
+    
+    }while(flag==1);
+    
+    
+      System.out.println("\n MARKS UPDATED SUCCESSFULLY...");
+      
+      
+     //recalculating total obtained marks
+      total = total -  marks[s-1][3];
+      
+      //calculating updated total marks of s-1 subject
+      marks[s-1][3] = marks[s-1][0] +  marks[s-1][1] + marks[s-1][2];
+      
+      //adding updated marks to total obtained marks
+        total = total + marks[s-1][3];
+    }
+    
+    
+    //function to calculate the percentage
+    float percentage()
+    {
+    //returning the percentage
+        return total/nsub;
+    }
+   
+    //function to compute the grade for ith subject
+    String grade(int i)
+    {
+  grade = ""; //initializing the grade variable
+  
+  // if-else-if-else block used to check the grade
+  
+      if(marks[i][3] >=91 && marks[i][3]<=100)
+      {
+       grade = grade + "O";
+       return grade;    //returning the grade
+      }
+      else if(marks[i][3]>=81 && marks[i][3]<=90)
+      {
+      
+       grade = grade + "A";
+      return grade; //returning the grade
+      }
+     else if(marks[i][3]>=71 && marks[i][3]<=80)
+      {
+       
+       grade = grade + "B";
+      return grade; //returning the grade
+      }
+     else if(marks[i][3]>=61 && marks[i][3]<=70)
+      {
+      
+       grade = grade + "C";
+       return grade; //returning the grade
+      }
+     else if(marks[i][3]>=51 && marks[i][3]<=60)
+      {
+       
+       grade = grade + "D";
+       return grade; //returning the grade
+      }
+     else if(marks[i][3]>=35 && marks[i][3]<=50)
+      {
+     
+       grade = grade + "E";
+       return grade; //returning the grade
+      }
+     else
+     {
+      
+      grade = grade + "F";
+      return grade; //returning the grade
+     }
+     
+    }
+   
+    // function to print the report card of this student
+     void report()
+     {
+      System.out.print("\n____________________________________________________________________________________________________________");
+      System.out.print("\n           MKSSS CUMMINS COLLEGE OF ENGINEERING FOR WOMEN'S, PUNE                ");
+      System.out.print("\n____________________________________________________________________________________________________________");
+      System.out.print("\n*******************************************  SY BTECH  *****************************************************");
+      System.out.print("\n NAME OF THE STUDENT : "+name);
+      System.out.print("\n C NUMBER : "+c_no);
+      System.out.print("\n ROLL NUMBER : "+rollno);
+      System.out.print("\n____________________________________________________________________________________________________________");
+      System.out.println();
+      System.out.format("%42s %10s %8s %8s %8s %8s %12s", "NAME","         ","T1","T2","ESE","TOTAL","GRADES");
+      System.out.print("\n____________________________________________________________________________________________________________");
+      System.out.println();
+      
+      for(int i=0;i<nsub;i++)
+      {
+       System.out.format("%42s %10s %8d %8d %8d %8d %12s", sub_name[i],"          ",(int)marks[i][0],(int)marks[i][1],(int)marks[i][2],(int)marks[i][3],grade(i));
+       System.out.println();
+      }
+      System.out.print("\n_____________________________________________________________________________________________________________");
+      System.out.print("\n PERCENTAGE : "+percentage());   //calling the percentage() function to get the percentage
+      System.out.print("\n_____________________________________________________________________________________________________________");
+      System.out.print("\n REMARK : "+remark());           // calling the remark() function
+      System.out.print("\n_____________________________________________________________________________________________________________");
+      
+     }
+    
+     
+     //function to return the remark for this student based on percentage
+     String remark()
+     {
+      String remarks = ""; //creating a string for storing remark
+      
+      float temp = percentage();   //calling percentage() function to get the percentage
+      
+      //computing the remark
+      if(temp>=91.0 && temp<=100)
+      {
+       remarks = " CONGRATULATIONS...YOU SCORED VERY WELL...KEEP IT UP!!"; //storing the remark in remarks variable
+      }
+      else if(temp>=81.0 && temp<=90.0)
+      {
+       remarks = "KEEP IT UP!! YOU CAN DO BETTER..."; //storing the remarks in remark variable
+      }
+      else if(temp>=71.0 && temp<=80.0)
+      {
+       remarks = " NEED TO WORK MORE..."; //storing the remark in remarks variable
+      }
+      else if(temp>=61.0 && temp<=70.0)
+      {
+       remarks = " NEED TO WORK VERY HARD..."; //storing the remark in remarks variable
+      }
+      else if(temp>=51.0 && temp<=60.0)
+      {
+       remarks = " TAKE STUDIES SERIOUSLLY... WORK HARD "; //storing the remark in remarks variable
+      }
+      else if(temp>=35.0 && temp<=50.0)
+      {
+       remarks = " DISAPPOINTING PERFORMANCE :( "; //storing the remark in remarks variable
+      }
+      else if(temp < 35.0)
+      {
+       remarks = " YOU ARE FAILED :( "; //storing the remark in remarks variable
+      }
+      
+      //RETURN THE remarks VARIABLE
+      return remarks;
+     }
+     
+     //FUNCTION TO CHECK WHETHER THE STUDENT IS FAILED IN ANY SUBJECT OR NOT
+     void failed()
+     {
+         
+        int flag=0;                         //FLAG TO INDICATE WHETHER FAILED OR NOT
+        
+        //LOOPING OVER  NUMBER OF SUBJECTS
+        for(int i=0;i<nsub;i++)
+        {
+       //CALLING THE grade() FUNCTION TO COMPUTE THE GRADE FOR ith SUBJECT
+      grade = grade(i);
+      
+      // IF THE GRADE IS F i.e. FAIL THEN SET THE FLAG TO 1
+      if(grade.compareToIgnoreCase("F") == 0)       
+      {
+      flag=1;
+      }
+      
+        }
+        
+        //CHECK IF FLAG IS SET THEN DISPLAY STUDENT AS FAILED
+        if(flag == 1)
+        {
+        System.out.print("\nROLL NUMBER : "+rollno+ "      :  FAIL");
+        
+        }
+        
+      }
+  
+     
+ }
+
+
+
+//DRIVER CLASS
+public class driver
+{
+public static void main(String[] args) {
+ // TODO Auto-generated method stub
+ admin a = new admin();             //CREATING THE OBJECT
+  a.create();                       //CALLING THE CREATE FUNCTION
+ 
+
+ int ch=0;                       //INITIALIZING THE VARIABLE
+
+   Scanner scan = new Scanner(System.in);
+  
+  do
+  {
+  //DISPLAYING THE MENU
+   System.out.print("\n\n\t******************* MENU ************************");
+   System.out.print("\n\t\t 1.  ADMIN ");
+   System.out.print("\n\t\t 2.  STUDENT. ");
+   System.out.print("\n\t\t 3.  EXIT");
+   System.out.print("\n\t\t ENTER YOUR CHOICE : ");
+   ch = scan.nextInt();
+   System.out.print("\n ");
+      switch(ch)               //SWITCH CASE
+      {
+       case 1:
+         int ch1=0;
+         do
+         {
+         //DISPLAYING MENU FOR ADMIN
+            System.out.print("\n\n\t\t***************** MENU ******************");
+            System.out.print("\n\t\t\t 1. INSERT A STUDENT RECORD. ");
+            System.out.print("\n\t\t\t 2. DELETE A STUDENT RECORD . ");
+            System.out.print("\n\t\t\t 3. UPDATE RECORD OF STUDENT  ");
+            System.out.print("\n\t\t\t 4. DISPLAY FAILED STUDENT LIST . ");
+            System.out.print("\n\t\t\t 5.  EXIT");
+            System.out.print("\n\t\t\t ENTER YOUR CHOICE : ");
+            ch1 = scan.nextInt();
+            System.out.print("\n ");
+            switch(ch1)
+            {
+             case 1:
+              a.insert();   //CALLING THE INSERT FUNCTION
+              break; //BREAKING THE SWITCH CASE
+              
+             case 2:
+              a.delete();   //CALLING THE INSERT FUNCTION
+              break;
+              
+             case 3:
+              a.update(); //CALLING THE INSERT FUNCTION
+              break;
+              
+             case 4:
+              a.failed_list();   //CALLING THE INSERT FUNCTION
+              break;
+              
+             case 5:
+              break;
+              
+        default:                //DEFAULT CASE FOR INVALID INPUT
+         System.out.print("\n INVALID INPUT ...");
+            }
+            
+         }while(ch1 != 5);          // VALIDATING THE WHILE CONDITION
+         break;
+         
+       case 2:
+            ch1 = 0;
+         do
+         {
+         //PRINTING MENU FOR STUDENT
+          System.out.print("\n\n\t\t************* MENU **************");
+            System.out.print("\n\t\t\t 1. PRINT REPORT CARD . ");
+            System.out.print("\n\t\t\t 2. EXIT. ");
+            System.out.print("\n\t\t\t ENTER YOUR CHOICE ");
+            ch1 = scan.nextInt();
+            System.out.print("\n ");
+            switch(ch1)      //SWITCH CASE 
+            {
+             case 1:
+               a.report_card(); //CALLING report_card() function
+               break;
+                
+             case 2:
+                  break;
+                  
+             default:               //DEFAULT CASE FOR INVALID INPUT
+               System.out.print("\n INVALID INPUT ...");    
+                 
+            }
+         }while(ch1 != 2);    //VALIDATING THE WHILE CONDITION
+         break;
+         
+        case 3:
+        break;
+        
+        default:               //DEFAULT CASE FOR INVALID INPUT
+               System.out.print("\n INVALID INPUT ...");
+        
+      } 
+   
+  }while(ch != 3);     //VALIDATING THE WHILE CONDITION
+}
+}
+
+
