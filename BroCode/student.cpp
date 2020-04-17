@@ -179,7 +179,6 @@ using namespace std;
 		    	<<book[1]<<","
 		    	<<book[2]<<","
 		    	<<d.getDate()<<","
-		    	<<count
 		    	<<"\n";
 				cout<<"\n\tBook issued !";
 
