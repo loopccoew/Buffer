@@ -288,10 +288,10 @@ void librarian::showBooks()
     vector<string> row;
     string line,word;
 
-    while(fout)
+    while(getline(fout,line))
     {
         row.clear(); 
-        getline(fout,line); 
+        
         stringstream s(line); 
   
         while(getline(s,word,','))
