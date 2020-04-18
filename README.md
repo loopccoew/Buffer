@@ -3,18 +3,18 @@ The buffer project series repository
 # A Comparative Performance Analysis of Popular Algorithms in Languages you've studied
 
 # Objectives 
----
+
 This research based project analyses the comparison between C , C++ and Python on different sorting methods performed on different intel core processors(i3, i5 and i7) taking different inputs at a time.
 
 # Features
----
+
 - Bubble sort , Selection sort , Insertion sort , Merge sort and Radix sort algorithms are executed on C , C++ and Python.
 - Execution time of the codes are calculated for different number of inputs(10000,50000,100000,500000).
 - Ratios and graphs are plotted for different sets of inputs.
 - Comparison on the basis of the processors (i3 , i5 and i7) is computed.
 
 # Algorithms used
----
+
 ### Bubble Sort
      
 
@@ -30,8 +30,8 @@ This research based project analyses the comparison between C , C++ and Python o
 ### Radix Sort
         
 
-# Tean members and their contribution
----
+# Team members and their contribution
+
 #### 1.PRIYAL EKANDE
 Priyal Ekande is a Second Year IT student of MKSSS Cummins College of Engineering Pune.She worked on the C language codes of different sorts ,has calculated execution time of all the programs on i5 processor and has worked on the analysis of the project.
 ### 2.GARGI SAMBHARE
@@ -42,7 +42,7 @@ Mansi Sharma is a Second Year ENTC student of MKSSS Cummins College of Engineeri
 Akshat Naoghare is a Second Year COMP student of MKSSS Cummins College of Engineering Pune.She worked on calculating the ratios,plotting of performance analysis graphs , has calculated execution time of all the programs on i7 processors ,worked on literature review of the project and readme file.
 
 # Task Accomplished by each file
----
+
 #### 1. loopc.c  file
 This file contains the C language code used to calculate the execution time of all the sorting techniques.
 #### 2. Loopcpp.cpp  file
