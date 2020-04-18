@@ -408,7 +408,7 @@ This may be interesting, **the slowest Core i3 chips runs at a faster speed than
 
 In this research based project we have described our work on **comparative analysis of popular algorithms in C, C++ and Python.**
 The algorithms that we chose, were **Bubble sort, Selection sort, Insertion sort , Merge sort and Radix sort.**
-The result obtained from above analysis says that, Bubble Sort, Selection Sort and Insertion Sort are fairly straightforward, but they are relatively inefficient except for small sized arrays. Merge Sort and Radix Sort are more complicated, but also much faster for large sized arrays. Merge Sort is, on average, the fastest algorithm. Bubble Sort  algorithm is the slowest.
+The result obtained from above analysis says that, Bubble Sort, Selection Sort and Insertion Sort are fairly straightforward, but they are relatively inefficient except for small number of inputs. Merge Sort and Radix Sort are more complicated, but also much faster for large number of inputs. Merge Sort is, on average, the fastest algorithm. Bubble Sort  algorithm is the slowest.
 In addition to this ,we have also established the fact that **performance wise C++ is the fastest language when compared with C and Python.**
 Although there are minor differences between C and C++, **C++ is preferred over C** as it **enables the user to build reusable abstractions with templates, OOP and functional composition.**
 **Python being an Interpreted language is slower than C and C++.**
