@@ -29,7 +29,8 @@ Various sorting algorithms used in this process are:
 	   
 	  - Radix Sort
 
-**A.** **Bubble sort**, sometimes referred to as **sinking sort**, is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps "Swap (computer science)") them if they are in the wrong order. The algorithm, which is a comparison sort, is named for the way smaller or larger elements "bubble" to the top of the list. This simple algorithm performs poorly in real world use and is used primarily as an educational tool.
+### **A.** **Bubble sort**,
+sometimes referred to as **sinking sort**, is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps "Swap (computer science)") them if they are in the wrong order. The algorithm, which is a comparison sort, is named for the way smaller or larger elements "bubble" to the top of the list. This simple algorithm performs poorly in real world use and is used primarily as an educational tool.
 
  ***1. Algorithm:***
     
@@ -62,7 +63,8 @@ Various sorting algorithms used in this process are:
 
 
 
-**B.** **Selection sort** algorithm is an in-place comparison-based algorithm in which the list is divided into two parts, the sorted part at the left end and the unsorted part at the right end. Initially, the sorted part is empty and the unsorted part is the entire list.
+### **B.** **Selection sort**
+this algorithm is an in-place comparison-based algorithm in which the list is divided into two parts, the sorted part at the left end and the unsorted part at the right end. Initially, the sorted part is empty and the unsorted part is the entire list.
 
 The smallest element is selected from the unsorted array and swapped with the leftmost element, and that element becomes a part of the sorted array. This process continues moving unsorted array boundary by one element to the right.
 
@@ -100,7 +102,8 @@ The smallest element is selected from the unsorted array and swapped with the le
 
 	Worst Case= O(n^2)
 
-**C.** **Insertion Sort** works just like its name suggests - it inserts each item into its proper place in the final list. In Insertion sort, the first iteration starts with comparison of 1st element with 0th element. In the second iteration the element is compared with 0th and 1st element. In general in every iteration an element is compared with all elements. If at same point it is found the element can be inserted at a position then space is created for it by shifting the other element one position right and inserting the element at the suitable position. This procedure is repeated for all the elements in the array.
+### **C.** **Insertion Sort**
+this algorithm works just like its name suggests - it inserts each item into its proper place in the final list. In Insertion sort, the first iteration starts with comparison of 1st element with 0th element. In the second iteration the element is compared with 0th and 1st element. In general in every iteration an element is compared with all elements. If at same point it is found the element can be inserted at a position then space is created for it by shifting the other element one position right and inserting the element at the suitable position. This procedure is repeated for all the elements in the array.
 
 ***1) Algorithm:***
 
@@ -134,7 +137,7 @@ The implementation of insertion Sort shows that there are (n−1) passes to sort
 
 
 
-**D.** **Merge Sort:**
+### **D.** **Merge Sort:**
 
 This sorting method is an example of the Divide-And-Conquer paradigm i.e. it breaks the data into two halves and then sorts the two half data sets recursively, and finally merges them to obtain the complete sorted list. Conceptually, a merge sort works as follows
 
@@ -159,7 +162,8 @@ This sorting method is an example of the Divide-And-Conquer paradigm i.e. it bre
 		Average Case= O (n logn)
 		Worst Case= O (n logn)
 
-**E.** **Radix Sort** sorts the numbers according to their digits. The comparisons are made among the digits of the number from LSB to MSB. The number of passes depends upon the length of the number with the most number of digits.
+### **E.** **Radix Sort** 
+sorts the numbers according to their digits. The comparisons are made among the digits of the number from LSB to MSB. The number of passes depends upon the length of the number with the most number of digits.
 
 ***1) Algorithm:***
 
