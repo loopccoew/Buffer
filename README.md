@@ -193,6 +193,7 @@ sorts the numbers according to their digits. The comparisons are made among the 
 		Step 11 : END
 
 ***2) Example:***
+
 ![enter image description here](http://scanftree.com/Data_Structure/radixpro.png)
 
 ***3) Analysis:***
@@ -352,7 +353,7 @@ We have used intel core processors i3, i5 and i7. Because of absence of Turbo bo
 Since **performance improvement is the goal** thus this study gives a trend for **future research in order to minimize the time taken for sorting.**
 
 
-# REFERENCES
+# References
 
 
 [1] www.geeksforgeeks.com
