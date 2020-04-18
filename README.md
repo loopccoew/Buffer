@@ -31,7 +31,7 @@ Various sorting algorithms used in this process are:
 
 **A.** **Bubble sort**, sometimes referred to as **sinking sort**, is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps "Swap (computer science)") them if they are in the wrong order. The algorithm, which is a comparison sort, is named for the way smaller or larger elements "bubble" to the top of the list. This simple algorithm performs poorly in real world use and is used primarily as an educational tool.
 
- 1. Algorithm:
+ ***1. Algorithm:***
     
     	1. for  i = 0 to (n-1)
     
@@ -47,11 +47,12 @@ Various sorting algorithms used in this process are:
     
     	2. end outer for
     
- 2. Example:
+ ***2. Example:***
+ 
 
-	![enter image description here](http://www.equestionanswers.com/c/images/bubble-sort-step1-iteration-stages.png)
+![enter image description here](http://www.equestionanswers.com/c/images/bubble-sort-step1-iteration-stages.png)
 	
-3. Analysis: Bubble sort is data sensitive. The number of iterations required may be between 1 and (N-1). The best case for bubble sort is when only one iteration is required. The number of comparisons required is (N-1). The worst case arises when the given array is sorted in reverse order.
+***3. Analysis:*** Bubble sort is data sensitive. The number of iterations required may be between 1 and (N-1). The best case for bubble sort is when only one iteration is required. The number of comparisons required is (N-1). The worst case arises when the given array is sorted in reverse order.
 
 		Best Case = O (n)
 
@@ -65,7 +66,7 @@ Various sorting algorithms used in this process are:
 
 The smallest element is selected from the unsorted array and swapped with the leftmost element, and that element becomes a part of the sorted array. This process continues moving unsorted array boundary by one element to the right.
 
-1) Algorithm:
+***1) Algorithm:***
 
 		1. for  int  i = 0 to (n-1)
 
@@ -84,12 +85,12 @@ The smallest element is selected from the unsorted array and swapped with the le
 		4. End outer for
 
 
-2) Example:
+***2) Example:***
 
 ![enter image description here](http://brianredd.com/wp-content/uploads/2015/09/SelectionSortExample_v5.png)
 
 
-3) Analysis: Selecting the smallest element requires scanning all n elements, so this takes n − 1 comparisons and then swapping or interchanging it into the first position. Finding the next lowest element requires scanning the remaining (n − 1) elements and so on, for
+***3) Analysis:*** Selecting the smallest element requires scanning all n elements, so this takes n − 1 comparisons and then swapping or interchanging it into the first position. Finding the next lowest element requires scanning the remaining (n − 1) elements and so on, for
 
 (n − 1) + (n − 2) + ... + 2 + 1 = n (n − 1) / 2= O(n2)
 
@@ -101,7 +102,7 @@ The smallest element is selected from the unsorted array and swapped with the le
 
 **C.** **Insertion Sort** works just like its name suggests - it inserts each item into its proper place in the final list. In Insertion sort, the first iteration starts with comparison of 1st element with 0th element. In the second iteration the element is compared with 0th and 1st element. In general in every iteration an element is compared with all elements. If at same point it is found the element can be inserted at a position then space is created for it by shifting the other element one position right and inserting the element at the suitable position. This procedure is repeated for all the elements in the array.
 
-1) Algorithm:
+***1) Algorithm:***
 
 		Step 1 − If it is the first element, it is already sorted. return 1;
 
@@ -115,10 +116,10 @@ The smallest element is selected from the unsorted array and swapped with the le
 	
 		Step 6 − Repeat until list is sorted
 
-2) Example:
+***2) Example:***
 
 ![enter image description here](https://cdncontribute.geeksforgeeks.org/wp-content/uploads/insertionsort.png)
-3) Analysis
+***3) Analysis***
 
 The implementation of insertion Sort shows that there are (n−1) passes to sort n . The iteration starts at position 1 and moves through position (n−1), as these are the elements that need to be inserted back into the sorted sublists. The maximum number of comparisons for an insertion sort is (n−1) .Total numbers of comparisons are:
 
@@ -141,18 +142,18 @@ This sorting method is an example of the Divide-And-Conquer paradigm i.e. it bre
 
 - Repeatedly merge sublists to produce new sublists until there is only 1 sublist remaining. This will be the sorted list.
 
-1) Algorithm:
+***1) Algorithm:***
 
-		**Step 1** − if it is only one element in the list it is already sorted, return.
+		Step 1 − if it is only one element in the list it is already sorted, return.
 
-		**Step 2** − divide the list recursively into two halves until it can no more be divided.
+		Step 2 − divide the list recursively into two halves until it can no more be divided.
 
-		**Step 3** − merge the smaller lists into new list in sorted order.
+		Step 3 − merge the smaller lists into new list in sorted order.
 
-2) Example:
+***2) Example:***
 					![enter image description here](https://www.geeksforgeeks.org/wp-content/uploads/Merge-Sort-Tutorial.png)
 
-3) Analysis: In order to analyze the Merge Sort function, we need to consider the two distinct processes that make up its implementation. First, the list is split into halves. We divide a list in half logn times where n is the length of the list. The second process is the merge. Each item in the list will eventually be processed and placed on the sorted list. So the merge operation which results in a list of size n requires n operations. The result of this analysis is that logn splits, each of which costs n for a total of n (log n) operations.
+***3) Analysis:*** In order to analyze the Merge Sort function, we need to consider the two distinct processes that make up its implementation. First, the list is split into halves. We divide a list in half logn times where n is the length of the list. The second process is the merge. Each item in the list will eventually be processed and placed on the sorted list. So the merge operation which results in a list of size n requires n operations. The result of this analysis is that logn splits, each of which costs n for a total of n (log n) operations.
 
 		Best Case = O (n logn)
 		Average Case= O (n logn)
@@ -160,7 +161,7 @@ This sorting method is an example of the Divide-And-Conquer paradigm i.e. it bre
 
 **E.** **Radix Sort** sorts the numbers according to their digits. The comparisons are made among the digits of the number from LSB to MSB. The number of passes depends upon the length of the number with the most number of digits.
 
-1) Algorithm:
+***1) Algorithm:***
 
 		Step 1 : Find the largest number in ARR as LARGE
 
@@ -187,10 +188,10 @@ This sorting method is an example of the Divide-And-Conquer paradigm i.e. it bre
 
 		Step 11 : END
 
-2) Example:
+***2) Example:***
 ![enter image description here](http://scanftree.com/Data_Structure/radixpro.png)
 
-3) Analysis:
+***3) Analysis:***
 
 Since radix sort is a non-comparative algorithm, it has advantages over comparative sorting algorithms.
 
@@ -372,4 +373,5 @@ Since **performance improvement is the goal** thus this study gives a trend for 
 [20] www.educative.io
 [21] www.ijlcenca.in
 [22] www.sce.carleton.ca
+
 
