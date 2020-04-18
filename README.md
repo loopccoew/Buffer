@@ -15,19 +15,19 @@ This research based project analyses the comparison between C , C++ and Python o
 
 # Algorithms used
 
-### Bubble Sort
+#### 1. Bubble Sort
      
 
-### Selection Sort
+#### 2. Selection Sort
        
 
-### Insertion Sort
+#### 3. Insertion Sort
        
 
-### Merge Sort
+#### 4. Merge Sort
       
  
-### Radix Sort
+#### 5. Radix Sort
         
 
 # Team members and their contribution
