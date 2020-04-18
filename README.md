@@ -53,11 +53,11 @@ This file contains the Python language code used to calculate execution time of 
 This file contains performance analysis ratios and graphs of C ,C++ and Python codes on different processors
 #### 5.10000INPUTS.txt file
 Contains 10000 inputs generated randomly.
-#### 5.50000INPUTS.txt file
+#### 6.50000INPUTS.txt file
 Contains 50000 inputs generated randomly.
-#### 5.100000INPUTS.txt file
+#### 7.100000INPUTS.txt file
 Contains 100000 inputs generated randomly.
-#### 5.500000INPUTS.txt file
+#### 8.500000INPUTS.txt file
 Contains 500000 inputs generated randomly.
 
 
