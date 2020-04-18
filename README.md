@@ -32,7 +32,7 @@ This research based project analyses the comparison between C , C++ and Python o
 
 # Team members and their contribution
 
-#### 1.PRIYAL EKANDE
+### 1.PRIYAL EKANDE
 Priyal Ekande is a Second Year IT student of MKSSS Cummins College of Engineering Pune.She worked on the C language codes of different sorts ,has calculated execution time of all the programs on i5 processor and has worked on the analysis of the project.
 ### 2.GARGI SAMBHARE
 Gargi Sambhare is a Second Year IT student of MKSSS Cummins College of Engineering Pune.She worked on the Python language codes of different sorts , has calculated execution time of all the programs on i5 processor and has worked on research methodology and abstract of the project.
@@ -217,7 +217,8 @@ This sorting method is an example of the Divide-And-Conquer paradigm i.e. it bre
 		Step 3 − merge the smaller lists into new list in sorted order.
 
 ***2) Example:***
-					![enter image description here](https://www.geeksforgeeks.org/wp-content/uploads/Merge-Sort-Tutorial.png)
+					
+![enter image description here](https://www.geeksforgeeks.org/wp-content/uploads/Merge-Sort-Tutorial.png)
 
 ***3) Analysis:*** In order to analyze the Merge Sort function, we need to consider the two distinct processes that make up its implementation. First, the list is split into halves. We divide a list in half logn times where n is the length of the list. The second process is the merge. Each item in the list will eventually be processed and placed on the sorted list. So the merge operation which results in a list of size n requires n operations. The result of this analysis is that logn splits, each of which costs n for a total of n (log n) operations.
 
