@@ -2,11 +2,74 @@
 The buffer project series repository
 # A Comparative Performance Analysis of Popular Algorithms in Languages you've studied
 
+# Objectives 
+---
+This research based project analyses the comparison between C , C++ and Python on different sorting methods performed on different intel core processors(i3, i5 and i7) taking different inputs at a time.
+
+# Features
+---
+- Bubble sort , Selection sort , Insertion sort , Merge sort and Radix sort algorithms are executed on C , C++ and Python.
+- Execution time of the codes are calculated for different number of inputs(10000,50000,100000,500000).
+- Ratios and graphs are plotted for different sets of inputs.
+- Comparison on the basis of the processors (i3 , i5 and i7) is computed.
+
+# Algorithms used
+---
+### Bubble Sort
+     
+
+### Selection Sort
+       
+
+### Insertion Sort
+       
+
+### Merge Sort
+      
+ 
+### Radix Sort
+        
+
+# Tean members and their contribution
+---
+#### 1.PRIYAL EKANDE
+Priyal Ekande is a Second Year IT student of MKSSS Cummins College of Engineering Pune.She worked on the C language codes of different sorts ,has calculated execution time of all the programs on i5 processor and has worked on the analysis of the project.
+### 2.GARGI SAMBHARE
+Gargi Sambhare is a Second Year IT student of MKSSS Cummins College of Engineering Pune.She worked on the Python language codes of different sorts , has calculated execution time of all the programs on i5 processor and has worked on research methodology and abstract of the project.
+### 3.MANSI SHARMA
+Mansi Sharma is a Second Year ENTC student of MKSSS Cummins College of Engineering Pune.She worked on the C++ language codes of different sorts ,has calculated execution time of all the programs on i3 processor and has worked on the results and references of the project.
+### 4.AKSHAT NAOGHARE
+Akshat Naoghare is a Second Year COMP student of MKSSS Cummins College of Engineering Pune.She worked on calculating the ratios,plotting of performance analysis graphs , has calculated execution time of all the programs on i7 processors ,worked on literature review of the project and readme file.
+
+# Task Accomplished by each file
+---
+#### 1. loopc.c  file
+This file contains the C language code used to calculate the execution time of all the sorting techniques.
+#### 2. Loopcpp.cpp  file
+This file contains the C++ language code that has been used to calculate execution time of all the sorting techniques.
+#### 3. looppython.py  file
+This file contains the Python language code used to calculate execution time of all the sorting techniques.
+#### 4.Execution time analysis.xlsx file
+This file contains performance analysis ratios and graphs of C ,C++ and Python codes on different processors
+#### 5.10000INPUTS.txt file
+Contains 10000 inputs generated randomly.
+#### 5.50000INPUTS.txt file
+Contains 50000 inputs generated randomly.
+#### 5.100000INPUTS.txt file
+Contains 100000 inputs generated randomly.
+#### 5.500000INPUTS.txt file
+Contains 500000 inputs generated randomly.
+
+
+
+
+
+
 # Abstract
 
 There are many programming languages existent in this world, each of them with its own pros and cons. C, CPP, Python are very extensively used for different purposes. While C and CPP have been used since a long time and are still in demand, Python has become popular in the recent times comparatively. This **research project focuses on the comparative analysis of these languages with other different aspects like processors, sorting techniques (Sorting refers to the arrangement of data in a particular order using a particular logic.) and amount of data given as input.**
 # Literature Review
-- ## **_INTRODUCTION:_**
+- ## **_Introduction:_**
 
 **What is an algorithm?**
 
