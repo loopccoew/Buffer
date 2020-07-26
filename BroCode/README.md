@@ -33,7 +33,8 @@ The Teacher and Student can :
 4. Manasi Kasande - main.cpp, user.cpp, date.cpp, person.cpp and the corresponding header files
 
 ### REFERENCES
-1. picosha2.h - the header file used for SHA256 - was originally created by a student from MIT,USA
-2. C++ Complete Reference by Herbert Schildt
-3. geeksforgeeks, sanfoundry
+1. picosha2.h - the header file used for SHA256 - https://github.com/okdshin/PicoSHA2
+2. C++ Complete Reference by Herbert Schildt 
+3. www.geeksforgeeks.com
+4. www.sanfoundry.com
 
